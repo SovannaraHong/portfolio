@@ -1,0 +1,94 @@
+/* corkboard tone for the sidebar — a shade deeper than the main paper
+   background so the two feel like separate physical layers */
+.bg-corkboard {
+  /* background-color: #efe6cf; */
+  background-color: #fdfbf5;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(21, 42, 107, 0.07) 1px, transparent 0),
+    linear-gradient(180deg, rgba(21, 42, 107, 0.06), transparent 30%);
+  background-size:
+    20px 20px,
+    auto;
+}
+
+.sidebar-shell {
+  box-shadow: 6px 0 24px -12px rgba(21, 42, 107, 0.28);
+}
+
+/* ===== nav tab base ===== */
+.nav-tab {
+  position: relative;
+  color: #152a6b;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+}
+.nav-tab::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.25) 0 6px,
+    rgba(255, 255, 255, 0.05) 6px 12px
+  );
+  pointer-events: none;
+}
+
+/* one distinct color per tab, matching the About page palette */
+.tab-sky {
+  background: #7fc4e8;
+}
+.tab-coral {
+  background: #ef7a5c;
+  color: #ffffff;
+}
+.tab-mint {
+  background: #3fae9b;
+  color: #ffffff;
+}
+.tab-sticky {
+  background: #f7e26a;
+}
+.tab-violet {
+  background: #8b5fbf;
+  color: #ffffff;
+}
+.tab-royal {
+  background: #2451e0;
+  color: #ffffff;
+}
+
+/* active route: tab pops out further, like a bookmarked page */
+.tab-active {
+  transform: translateX(6px) scale(1.03) rotate(0deg) !important;
+  box-shadow: 0 8px 18px rgba(21, 42, 107, 0.4);
+  outline: 2px solid rgba(21, 42, 107, 0.55);
+  outline-offset: -2px;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.animate-slidein {
+  animation: slidein 0.28s ease-out forwards;
+}
+
+/* keyboard focus visibility */
+.nav-tab:focus-visible {
+  outline: 3px solid #152a6b;
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-slidein {
+    animation: none !important;
+  }
+  .nav-tab {
+    transition: none !important;
+  }
+}

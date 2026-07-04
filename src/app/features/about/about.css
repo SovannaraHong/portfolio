@@ -1,0 +1,334 @@
+body {
+  font-family: 'DM Sans', sans-serif;
+}
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+.bg-paper-texture {
+  background-color: #f3ecd9;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(21, 42, 107, 0.08) 1px, transparent 0),
+    radial-gradient(560px circle at 8% 6%, rgba(36, 81, 224, 0.2), transparent 60%),
+    radial-gradient(520px circle at 95% 18%, rgba(239, 122, 92, 0.2), transparent 60%),
+    radial-gradient(600px circle at 12% 92%, rgba(63, 174, 155, 0.22), transparent 60%),
+    radial-gradient(480px circle at 92% 88%, rgba(247, 226, 106, 0.28), transparent 60%),
+    radial-gradient(420px circle at 55% 45%, rgba(139, 95, 191, 0.1), transparent 65%);
+  background-size:
+    22px 22px,
+    auto,
+    auto,
+    auto,
+    auto,
+    auto;
+  background-attachment: fixed, scroll, scroll, scroll, scroll, scroll;
+}
+
+/* ===== paper card ===== */
+.paper-card {
+  background: #fdfbf5;
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 18px 40px -20px rgba(21, 42, 107, 0.35);
+  position: relative;
+  overflow: hidden;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+.paper-card:hover {
+  transform: translateY(-2px);
+}
+
+/* colored top accent bar for paper cards — pick one per card */
+.paper-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--accent, #2451e0);
+}
+.accent-royal {
+  --accent: linear-gradient(90deg, #2451e0, #7fc4e8);
+  background: none;
+}
+.accent-royal::before {
+  background: linear-gradient(90deg, #2451e0, #7fc4e8);
+}
+.accent-royal:hover {
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 20px 44px -18px rgba(36, 81, 224, 0.45);
+}
+
+.accent-mint::before {
+  background: linear-gradient(90deg, #3fae9b, #f7e26a);
+}
+.accent-mint:hover {
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 20px 44px -18px rgba(63, 174, 155, 0.45);
+}
+
+.accent-coral::before {
+  background: linear-gradient(90deg, #ef7a5c, #8b5fbf);
+}
+.accent-coral:hover {
+  box-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.03),
+    0 20px 44px -18px rgba(239, 122, 92, 0.45);
+}
+
+/* ===== washi tape look for tags/labels ===== */
+.tape {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.28) 0 6px,
+    rgba(255, 255, 255, 0.06) 6px 12px
+  );
+  background-blend-mode: overlay;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* ===== sticky note ===== */
+.sticky-note {
+  box-shadow: 3px 6px 14px rgba(0, 0, 0, 0.18);
+}
+
+/* ===== chunky badge shadow ===== */
+.badge-tag {
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.15);
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
+/* ===== colored ID card ring ===== */
+.id-ring {
+  box-shadow:
+    0 0 0 3px rgba(36, 81, 224, 0.35),
+    0 18px 40px -20px rgba(21, 42, 107, 0.35);
+}
+
+/* ===== accent underline for the name heading ===== */
+.name-underline {
+  position: relative;
+  display: inline-block;
+}
+.name-underline::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  height: 10px;
+  z-index: -1;
+  background: linear-gradient(90deg, #7fc4e8, #f7e26a);
+  opacity: 0.55;
+  border-radius: 4px;
+}
+
+/* ===== section header chips (varied colors instead of always yellow) ===== */
+.chip {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.375rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  color: #152a6b;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+}
+.chip-sky {
+  background: #7fc4e8;
+}
+.chip-coral {
+  background: #ef7a5c;
+  color: #ffffff;
+}
+.chip-mint {
+  background: #3fae9b;
+  color: #ffffff;
+}
+.chip-sticky {
+  background: #f7e26a;
+}
+.chip-violet {
+  background: #8b5fbf;
+  color: #ffffff;
+}
+
+/* colored skill tags */
+.skill-pill {
+  color: #ffffff;
+  font-weight: 600;
+}
+.skill-sky {
+  background: #4d9dc9;
+}
+.skill-coral {
+  background: #ef7a5c;
+}
+.skill-mint {
+  background: #3fae9b;
+}
+.skill-violet {
+  background: #8b5fbf;
+}
+
+/* colored tool tiles */
+.tool-tile {
+  background: var(--tile-bg, #eef1f7);
+}
+
+/* =========================================================
+   ANIMATIONS
+   ========================================================= */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* hero entrance — no @angular/animations needed, just CSS + stagger delays */
+.hero-item {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.hero-item:nth-child(1) {
+  animation-delay: 0.05s;
+}
+.hero-item:nth-child(2) {
+  animation-delay: 0.17s;
+}
+
+.tag-item {
+  opacity: 0;
+  transform: scale(0.6);
+  animation: popIn 0.42s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.tag-item:nth-child(1) {
+  animation-delay: 0.5s;
+}
+.tag-item:nth-child(2) {
+  animation-delay: 0.59s;
+}
+.tag-item:nth-child(3) {
+  animation-delay: 0.68s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes swing {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes gradientShift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-swing {
+  animation: swing 5s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.marquee-track {
+  animation: marquee 16s linear infinite;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ribbon: animated tri-color gradient */
+.ribbon-gradient {
+  background: linear-gradient(90deg, #152a6b, #2451e0, #ef7a5c, #3fae9b, #152a6b);
+  background-size: 300% 100%;
+  animation: gradientShift 10s ease infinite;
+}
+
+/* ===== scroll-reveal (driven by RevealDirective in about.ts) ===== */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-swing,
+  .marquee-track,
+  .ribbon-gradient,
+  .badge-tag,
+  .hero-item,
+  .tag-item,
+  .paper-card {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .reveal-init {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

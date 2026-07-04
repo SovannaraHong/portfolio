@@ -1,0 +1,119 @@
+<div class="grid grid-cols-1 h-screen pt-[30px] font-poppins lg:grid-cols-2 gap-8">
+  <div
+    appReveal
+    [revealDelay]="0"
+    class="paper-card accent-mint from-left rounded-2xl p-6 sm:p-8 rotate-[0.4deg]"
+  >
+    <h2 class="chip chip-sky text-2xl -rotate-1 mb-5 font-poppins">Education</h2>
+    <div class="space-y-4 mb-8">
+      <div
+        class="flex gap-4 stagger-item"
+        *ngFor="let item of education; let i = index"
+        [style.--i]="i"
+      >
+        <span class="font-poppins text-lg text-royal w-14 shrink-0">{{ item.year }} </span>
+        <div>
+          <p class="font-semibold font-poppins">{{ item.title }}</p>
+          <p class="text-sm text-slate-500">{{ item.detail }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills -->
+    <h2 class="chip chip-coral text-2xl rotate-1 mb-5">Skills</h2>
+    <div class="flex flex-wrap gap-3 mb-8">
+      <span
+        *ngFor="let skill of skills; let i = index"
+        class="skill-pill stagger-item px-4 py-2 rounded-md text-sm transition-transform duration-200 hover:-translate-y-1"
+        [style.--i]="i"
+        [ngClass]="[
+          i % 4 === 0
+            ? 'skill-sky'
+            : i % 4 === 1
+              ? 'skill-coral'
+              : i % 4 === 2
+                ? 'skill-mint'
+                : 'skill-violet',
+          i % 2 === 0 ? 'rotate-1' : '-rotate-1',
+        ]"
+      >
+        {{ skill }}
+      </span>
+    </div>
+
+    <!-- Software -->
+    <h2 class="chip chip-violet text-2xl -rotate-1 mb-5">Tools</h2>
+    <div class="flex flex-wrap gap-6 items-center">
+      <div
+        class="flex flex-col items-center gap-1 group stagger-item"
+        *ngFor="let tool of software; let i = index"
+        [style.--i]="i"
+      >
+        <div
+          class="tool-tile w-12 h-12 rounded-lg flex items-center justify-center font-display font-bold transition-transform duration-200 group-hover:-translate-y-1 group-hover:rotate-6"
+          [ngClass]="tool.color"
+          [style.--tile-bg]="tool.tileBg"
+        >
+          {{ tool.label }}
+        </div>
+        <span class="text-xs text-slate-600 font-medium">{{ tool.name }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN: Experience -->
+  <div
+    appReveal
+    [revealDelay]="120"
+    class="paper-card accent-coral from-right rounded-2xl p-6 sm:p-8 -rotate-[0.4deg]"
+  >
+    <div class="flex items-center justify-between mb-6">
+      <h2 class="font-display font-bold text-3xl text-ink">Experience</h2>
+      <span class="chip chip-mint text-sm">verified ✓</span>
+    </div>
+
+    <div class="space-y-5">
+      <div>
+        <div class="flex items-center justify-between mb-1">
+          <p class="font-display font-semibold text-lg">
+            Software Development Student at SETEC Institute
+          </p>
+          <span class="tape rotate-2 bg-sticky text-ink text-xs font-semibold px-2 py-1 rounded"
+            >{{ year() }} – Now</span
+          >
+        </div>
+        <p class="text-sm text-slate-600 mb-3">
+          Building sites and internal tools for clients including:
+        </p>
+
+        <div
+          class="sticky-note stagger-item rounded-md p-3 mb-3 last:mb-0 transition-transform duration-200 hover:-translate-y-1"
+          *ngFor="let client of clients; let i = index"
+          [style.--i]="i"
+          [ngClass]="client.classes"
+          [class.-rotate-1]="i % 2 === 0"
+          [class.rotate-1]="i % 2 !== 0"
+        >
+          <div class="flex justify-between">
+            <p class="font-display font-semibold text-sm mb-1">{{ client.name }}</p>
+            <p class="font-display chip chip-mint text-[#152a6b] font-semibold text-sm mb-1">
+              {{ client.source }} ✓
+            </p>
+          </div>
+          <p class="text-xs text-slate-700">{{ client.note }}</p>
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-dashed border-slate-300">
+        <div class="flex items-center justify-between mb-1">
+          <p class="font-display font-semibold text-lg">Brightpath Software</p>
+          <span class="chip chip-sky text-xs">06.2021 – 12.2022</span>
+        </div>
+        <p class="text-sm text-slate-600">
+          Frontend Engineer — owned the onboarding flow rebuild and worked closely with design on a
+          new component system.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

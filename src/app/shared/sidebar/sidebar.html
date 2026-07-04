@@ -1,0 +1,90 @@
+<aside
+  class="sidebar-shell hidden lg:flex flex-col w-64 shrink-0 min-h-screen sticky top-0 bg-corkboard border-r-4 border-ink/10 py-8 font-body"
+>
+  <!-- <div class="px-6 mb-8">
+    <div
+      class="badge-tag inline-block -rotate-2 bg-gradient-to-r from-royal via-coral to-mint text-white font-display font-semibold text-2xl px-4 py-1.5 rounded-lg"
+    >
+      JD
+    </div>
+    <p class="font-hand text-lg text-ink/70 mt-2">navigate the binder</p>
+  </div> -->
+
+  <nav class="flex flex-col gap-3 pr-6 ml-[10px]">
+    <a
+      *ngFor="let item of navItems"
+      [routerLink]="item.path"
+      routerLinkActive="tab-active"
+      [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+      class="nav-tab {{ item.accent }} {{
+        item.rotate
+      }} flex items-center gap-3 pl-6 pr-4 py-3 font-display font-semibold text-ink text-sm uppercase tracking-wide rounded-r-xl transition-all duration-300 hover:translate-x-1 hover:rotate-0 hover:shadow-lg"
+    >
+      <span class="text-lg leading-none">{{ item.icon }}</span>
+      <span>{{ item.label }}</span>
+    </a>
+  </nav>
+
+  <!-- <div
+    class="mt-auto mx-6 sticky-note -rotate-1 bg-sticky rounded-md p-3 font-hand text-base text-ink"
+  >
+    "made with coffee &amp; css" ☕
+  </div> -->
+</aside>
+
+<!-- ============ MOBILE TOP BAR ============ -->
+<div
+  class="lg:hidden sticky top-0 z-40 flex items-center justify-between bg-corkboard border-b-4 border-ink/10 px-4 py-3"
+>
+  <div
+    class="badge-tag inline-block -rotate-1 bg-gradient-to-r from-royal via-coral to-mint text-white font-display font-semibold text-lg px-3 py-1 rounded-lg"
+  >
+    JD
+  </div>
+  <button
+    type="button"
+    (click)="mobileOpen = !mobileOpen"
+    class="tape rotate-1 bg-skytag text-ink font-display font-semibold text-xs px-3 py-2 rounded"
+  >
+    {{ mobileOpen ? 'CLOSE ✕' : 'MENU ☰' }}
+  </button>
+</div>
+
+<!-- ============ MOBILE DRAWER ============ -->
+<div
+  *ngIf="mobileOpen"
+  class="lg:hidden fixed inset-0 z-30 bg-ink/40 backdrop-blur-sm"
+  (click)="closeMobile()"
+></div>
+
+<aside
+  *ngIf="mobileOpen"
+  class="lg:hidden fixed top-0 left-0 z-40 h-full w-72 bg-corkboard border-r-4 border-ink/10 py-8 animate-slidein"
+>
+  <div class="px-6 mb-8 flex items-center justify-between">
+    <div
+      class="badge-tag inline-block -rotate-2 bg-gradient-to-r from-royal via-coral to-mint text-white font-display font-semibold text-xl px-3 py-1 rounded-lg"
+    >
+      JD
+    </div>
+    <button type="button" (click)="closeMobile()" class="text-ink/60 font-display text-xl px-2">
+      ✕
+    </button>
+  </div>
+
+  <nav class="flex flex-col gap-3 pr-6">
+    <a
+      *ngFor="let item of navItems"
+      [routerLink]="item.path"
+      routerLinkActive="tab-active"
+      [routerLinkActiveOptions]="{ exact: item.path === '/' }"
+      (click)="closeMobile()"
+      class="nav-tab {{ item.accent }} {{
+        item.rotate
+      }} flex items-center gap-3 pl-6 pr-4 py-3 font-display font-semibold text-ink text-sm uppercase tracking-wide rounded-r-xl transition-all duration-300"
+    >
+      <span class="text-lg leading-none">{{ item.icon }}</span>
+      <span>{{ item.label }}</span>
+    </a>
+  </nav>
+</aside>
