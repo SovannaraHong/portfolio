@@ -22,6 +22,14 @@ export const routes: Routes = [
         path: 'skill',
         loadComponent: () => import('./features/skill/skill').then((m) => m.Skill),
       },
+      {
+        path: 'project',
+        loadComponent: () => import('./features/project/project').then((m) => m.Project),
+      },
+      {
+        path: 'contact',
+        loadComponent: () => import('./features/contact/contact').then((m) => m.Contact),
+      },
     ],
   },
 ];

@@ -1,4 +1,4 @@
-<!-- ============ INTRO COUNTER (shown once on load, ~5s) ============ -->
+<!-- ============ INTRO COUNTER (unchanged) ============ -->
 <div
   *ngIf="loading()"
   class="loader-screen fixed inset-0 z-50 flex items-center justify-center bg-neutral-50 transition-opacity duration-500 ease-out"
@@ -12,11 +12,9 @@
 
   <div class="relative text-center">
     <p class="font-serif-italic text-lg text-neutral-500 mb-3">Loading Portfolio</p>
-
     <div class="font-display font-bold text-7xl sm:text-9xl text-neutral-900 tabular-nums">
       {{ count() }}
     </div>
-
     <div class="mt-6 w-56 sm:w-72 h-1 bg-neutral-200 rounded-full overflow-hidden mx-auto">
       <div
         class="h-full bg-blue-600 transition-all duration-75 ease-linear"
@@ -26,11 +24,10 @@
   </div>
 </div>
 
-<!-- ============ APP SHELL (sidebar + routed pages) ============ -->
-<div class="flex min-h-screen bg-paper-texture" [class.invisible]="loading()">
+<div class="flex flex-col min-h-screen bg-paper-texture" [class.invisible]="loading()">
   <app-sidebar></app-sidebar>
 
-  <main class="flex-1 min-w-0">
+  <main class="flex-1 min-w-0 pt-0">
     <router-outlet></router-outlet>
   </main>
 </div>

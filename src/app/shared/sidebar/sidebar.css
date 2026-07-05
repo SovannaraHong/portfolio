@@ -1,94 +1,73 @@
-/* corkboard tone for the sidebar — a shade deeper than the main paper
-   background so the two feel like separate physical layers */
-.bg-corkboard {
-  /* background-color: #efe6cf; */
-  background-color: #fdfbf5;
-  background-image:
-    radial-gradient(circle at 1px 1px, rgba(21, 42, 107, 0.07) 1px, transparent 0),
-    linear-gradient(180deg, rgba(21, 42, 107, 0.06), transparent 30%);
-  background-size:
-    20px 20px,
-    auto;
-}
-
-.sidebar-shell {
-  box-shadow: 6px 0 24px -12px rgba(21, 42, 107, 0.28);
-}
-
-/* ===== nav tab base ===== */
-.nav-tab {
+.nav-pill {
   position: relative;
-  color: #152a6b;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
-}
-.nav-tab::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.25) 0 6px,
-    rgba(255, 255, 255, 0.05) 6px 12px
-  );
-  pointer-events: none;
+  overflow: hidden;
+  color: #6b7280;
+  transition:
+    background-color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* one distinct color per tab, matching the About page palette */
-.tab-sky {
-  background: #7fc4e8;
-}
-.tab-coral {
-  background: #ef7a5c;
-  color: #ffffff;
-}
-.tab-mint {
-  background: #3fae9b;
-  color: #ffffff;
-}
-.tab-sticky {
-  background: #f7e26a;
-}
-.tab-violet {
-  background: #8b5fbf;
-  color: #ffffff;
-}
-.tab-royal {
-  background: #2451e0;
-  color: #ffffff;
+.nav-pill .icon-wrap svg {
+  transition: stroke 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* active route: tab pops out further, like a bookmarked page */
-.tab-active {
-  transform: translateX(6px) scale(1.03) rotate(0deg) !important;
-  box-shadow: 0 8px 18px rgba(21, 42, 107, 0.4);
-  outline: 2px solid rgba(21, 42, 107, 0.55);
-  outline-offset: -2px;
+.nav-pill .label {
+  display: inline-block;
+  max-width: 0;
+  opacity: 0;
+  margin-left: 0;
+  transition:
+    max-width 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    margin-left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@keyframes slidein {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-.animate-slidein {
-  animation: slidein 0.28s ease-out forwards;
+/* Hover on ANY tab (active or not): soft bg + label expands */
+.nav-pill:hover {
+  background-color: #3fae9b;
+  color: white;
+  transform: translateY(-1px);
 }
 
-/* keyboard focus visibility */
-.nav-tab:focus-visible {
-  outline: 3px solid #152a6b;
-  outline-offset: 2px;
+.nav-pill:hover .icon-wrap svg {
+  stroke: white;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .animate-slidein {
-    animation: none !important;
-  }
-  .nav-tab {
-    transition: none !important;
-  }
+.nav-pill:hover .label {
+  max-width: 160px;
+  opacity: 1;
+  margin-left: 2px;
+}
+
+/* Active tab: icon-only, colored — NO label, NO pill bg */
+.nav-pill.tab-active {
+  color: #3fae9b;
+}
+
+.nav-pill.tab-active .icon-wrap svg {
+  stroke: #3fae9b;
+}
+
+/* Active tab label stays hidden until hovered */
+.nav-pill.tab-active .label {
+  max-width: 0;
+  opacity: 0;
+  margin-left: 0;
+}
+
+.nav-pill.tab-active:hover {
+  background-color: rgba(63, 174, 155, 0.45);
+  color: white;
+}
+
+.nav-pill.tab-active:hover .icon-wrap svg {
+  stroke: #3fae9b;
+}
+
+.nav-pill.tab-active:hover .label {
+  max-width: 160px;
+  opacity: 1;
+  margin-left: 2px;
 }

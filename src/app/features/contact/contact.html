@@ -1,0 +1,136 @@
+<div
+  class="flex min-h-screen items-center justify-center bg-[#EFECE2] p-6 font-['Inter',sans-serif]"
+>
+  <div
+    class="card-enter relative w-full max-w-md overflow-hidden rounded-3xl border border-[#E7E3D8] bg-[#F7F5EF] p-8"
+  >
+    @if (!submitted) {
+      <div class="slide-in-left">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#9A9C8E]">Get in touch</p>
+        <h2
+          class="mt-2 text-2xl font-bold text-[#142420]"
+          style="font-family: 'Space Grotesk', sans-serif"
+        >
+          Send a message
+        </h2>
+        <p class="mt-1 text-sm text-[#6E756D]">I'll get back to you within a couple of days.</p>
+
+        <form
+          [formGroup]="form"
+          (ngSubmit)="onSubmit()"
+          class="mt-6 flex flex-col gap-4"
+          novalidate
+        >
+          <div>
+            <label for="name" class="block text-xs font-semibold text-[#5B6058]">Name</label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              placeholder="Your name"
+              class="mt-1 w-full rounded-lg border px-3 py-2 text-sm text-[#142420] outline-none transition-colors"
+              [ngClass]="
+                name?.invalid && name?.touched
+                  ? 'border-[#D85A30] focus:border-[#D85A30]'
+                  : 'border-[#E7E3D8] focus:border-[#142420]'
+              "
+            />
+            @if (name?.invalid && name?.touched) {
+              <p class="mt-1 text-xs text-[#D85A30]">
+                @if (name?.errors?.['required']) {
+                  Name is required.
+                } @else if (name?.errors?.['minlength']) {
+                  Name should be at least 2 characters.
+                }
+              </p>
+            }
+          </div>
+
+          <div>
+            <label for="email" class="block text-xs font-semibold text-[#5B6058]">Email</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="you@example.com"
+              class="mt-1 w-full rounded-lg border px-3 py-2 text-sm text-[#142420] outline-none transition-colors"
+              [ngClass]="
+                email?.invalid && email?.touched
+                  ? 'border-[#D85A30] focus:border-[#D85A30]'
+                  : 'border-[#E7E3D8] focus:border-[#142420]'
+              "
+            />
+            @if (email?.invalid && email?.touched) {
+              <p class="mt-1 text-xs text-[#D85A30]">
+                @if (email?.errors?.['required']) {
+                  Email is required.
+                } @else if (email?.errors?.['email']) {
+                  Enter a valid email address.
+                }
+              </p>
+            }
+          </div>
+
+          <div>
+            <label for="message" class="block text-xs font-semibold text-[#5B6058]">Message</label>
+            <textarea
+              id="message"
+              rows="4"
+              formControlName="message"
+              placeholder="What's on your mind?"
+              class="mt-1 w-full resize-none rounded-lg border px-3 py-2 text-sm text-[#142420] outline-none transition-colors"
+              [ngClass]="
+                message?.invalid && message?.touched
+                  ? 'border-[#D85A30] focus:border-[#D85A30]'
+                  : 'border-[#E7E3D8] focus:border-[#142420]'
+              "
+            ></textarea>
+            @if (message?.invalid && message?.touched) {
+              <p class="mt-1 text-xs text-[#D85A30]">
+                @if (message?.errors?.['required']) {
+                  Message is required.
+                } @else if (message?.errors?.['minlength']) {
+                  Message should be at least 10 characters.
+                }
+              </p>
+            }
+          </div>
+
+          <button
+            type="submit"
+            class="mt-2 rounded-lg bg-[#142420] py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+          >
+            Send message
+          </button>
+        </form>
+      </div>
+    } @else {
+      <div class="slide-in-right flex flex-col items-center py-6 text-center">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-[#C6DC4C]">
+          <svg
+            class="h-6 w-6 text-[#333F14]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h3
+          class="mt-4 text-xl font-bold text-[#142420]"
+          style="font-family: 'Space Grotesk', sans-serif"
+        >
+          Message sent
+        </h3>
+        <p class="mt-1 text-sm text-[#6E756D]">Thanks for reaching out — I'll reply soon.</p>
+        <button
+          (click)="sendAnother()"
+          class="mt-6 rounded-lg border border-[#E7E3D8] px-4 py-2 text-sm font-semibold text-[#142420] transition-colors hover:bg-white"
+        >
+          Send another message
+        </button>
+      </div>
+    }
+  </div>
+</div>

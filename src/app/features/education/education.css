@@ -1,7 +1,3 @@
-/* =========================================================
-   BACKGROUND — layered color blobs + dotted paper texture
-   (bumped opacities + added a violet blob for extra depth)
-   ========================================================= */
 .bg-paper-texture {
   background-color: #f3ecd9;
   background-image:

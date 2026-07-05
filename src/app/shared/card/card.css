@@ -1,0 +1,35 @@
+@keyframes card-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes card-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.card-enter {
+  animation: card-slide-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.card-enter.slide-from-right {
+  animation-name: card-slide-in-right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-enter {
+    animation: none;
+  }
+}

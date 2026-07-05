@@ -75,6 +75,9 @@ export class Skill {
       tools: [
         { name: 'Java', logo: '/icon/logoTech/java.png', color: '#f89820' },
         { name: 'Spring Boot', logo: '/icon/logoTech/springboot.png', color: '#6DB33F' },
+        { name: 'JWT', logo: '/icon/logoTech/jwt.png', color: '#000000' },
+        { name: 'Spring Security', logo: '/icon/logoTech/spring-security.png', color: '#6DB33F' },
+
         { name: 'Laravel', logo: '/icon/logoTech/laravel.png', color: '#FF2D20' },
         { name: 'PHP', logo: '/icon/logoTech/php.png', color: '#777BB4' },
         { name: 'Hibernate', logo: '/icon/logoTech/hibernate.png', color: '#59666C' },
@@ -99,6 +102,8 @@ export class Skill {
         { name: 'GitHub', logo: '/icon/logoTech/github.png', color: '#181717' },
         { name: 'Docker', logo: '/icon/logoTech/docker.png', color: '#2496ED' },
         { name: 'AWS', logo: '/icon/logoTech/aws.png', color: '#232F3E' },
+        { name: 'Maven', logo: '/icon/logoTech/maven.png', color: '#C71A36' },
+
         { name: 'Postman', logo: '/icon/logoTech/postman.png', color: '#FF6C37' },
         { name: 'JUnit', logo: '/icon/logoTech/junit.png', color: '#25A162' },
         { name: 'IntelliJ', logo: '/icon/logoTech/intellij.png', color: '#000000' },

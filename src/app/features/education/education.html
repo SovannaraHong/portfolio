@@ -1,4 +1,4 @@
-<div class="grid grid-cols-1 h-screen pt-[30px] font-poppins lg:grid-cols-2 gap-8">
+<div class="grid grid-cols-1 pt-[70px] px-[20px] bg-[#fdfbf5] font-poppins lg:grid-cols-2 gap-8">
   <div
     appReveal
     [revealDelay]="0"
@@ -16,47 +16,6 @@
           <p class="font-semibold font-poppins">{{ item.title }}</p>
           <p class="text-sm text-slate-500">{{ item.detail }}</p>
         </div>
-      </div>
-    </div>
-
-    <!-- Skills -->
-    <h2 class="chip chip-coral text-2xl rotate-1 mb-5">Skills</h2>
-    <div class="flex flex-wrap gap-3 mb-8">
-      <span
-        *ngFor="let skill of skills; let i = index"
-        class="skill-pill stagger-item px-4 py-2 rounded-md text-sm transition-transform duration-200 hover:-translate-y-1"
-        [style.--i]="i"
-        [ngClass]="[
-          i % 4 === 0
-            ? 'skill-sky'
-            : i % 4 === 1
-              ? 'skill-coral'
-              : i % 4 === 2
-                ? 'skill-mint'
-                : 'skill-violet',
-          i % 2 === 0 ? 'rotate-1' : '-rotate-1',
-        ]"
-      >
-        {{ skill }}
-      </span>
-    </div>
-
-    <!-- Software -->
-    <h2 class="chip chip-violet text-2xl -rotate-1 mb-5">Tools</h2>
-    <div class="flex flex-wrap gap-6 items-center">
-      <div
-        class="flex flex-col items-center gap-1 group stagger-item"
-        *ngFor="let tool of software; let i = index"
-        [style.--i]="i"
-      >
-        <div
-          class="tool-tile w-12 h-12 rounded-lg flex items-center justify-center font-display font-bold transition-transform duration-200 group-hover:-translate-y-1 group-hover:rotate-6"
-          [ngClass]="tool.color"
-          [style.--tile-bg]="tool.tileBg"
-        >
-          {{ tool.label }}
-        </div>
-        <span class="text-xs text-slate-600 font-medium">{{ tool.name }}</span>
       </div>
     </div>
   </div>
