@@ -39,7 +39,7 @@ export class Card {
       stack: ['Figma', 'Angular', 'Tailwind', 'Spring-boot', 'Spring-Security', 'JWT', 'Oracle'],
       accent: 'lime',
       logo: '/icon/log/coffee.jpg',
-      link: '#',
+      link: 'https://github.com/SovannaraHong/coffee-shop-system',
     },
     {
       name: 'ZENDO-CLONE',
@@ -50,7 +50,7 @@ export class Card {
       stack: ['Figma', 'React', 'Tailwind'],
       accent: 'teal',
       logo: '/icon/log/zando.png',
-      link: 'https://zando-clone-omega.vercel.app/',
+      link: 'https://zando-clone-five.vercel.app/',
     },
     {
       name: 'PKA-CLONE',
@@ -61,7 +61,7 @@ export class Card {
       stack: ['Figma', 'React', 'Tailwind'],
       accent: 'coral',
       logo: '/icon/log/p5.png',
-      link: 'https://website-e-commers.vercel.app/',
+      link: 'https://pka-ecommerce.vercel.app/',
     },
     {
       name: 'GUEST HOUSE',

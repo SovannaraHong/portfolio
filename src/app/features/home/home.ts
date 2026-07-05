@@ -21,12 +21,12 @@ export class Home {
     },
     {
       cate: 'FACEBOOK',
-      link: 'https://facebook.com/yourusername',
+      link: 'https://www.facebook.com/share/17w88PMyfJ/?mibextid=wwXIfr',
       icon: '     fa-brands fa-facebook',
     },
     {
       cate: 'TIKTOK',
-      link: 'https://www.tiktok.com/@yourusername',
+      link: 'https://www.tiktok.com/@akira1269',
       icon: '    fa-brands fa-tiktok',
     },
     {
