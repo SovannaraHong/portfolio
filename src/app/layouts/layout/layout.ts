@@ -26,7 +26,7 @@ export class Layout implements OnInit, OnDestroy {
       return;
     }
 
-    const totalDurationMs = 3000;
+    const totalDurationMs = 0;
     const totalSteps = 100;
     const stepMs = totalDurationMs / totalSteps;
 

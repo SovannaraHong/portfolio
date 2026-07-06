@@ -30,16 +30,16 @@
               placeholder="Your name"
               class="mt-1 w-full rounded-lg border px-3 py-2 text-sm text-[#142420] outline-none transition-colors"
               [ngClass]="
-                name?.invalid && name?.touched
+                name.invalid && name.touched
                   ? 'border-[#D85A30] focus:border-[#D85A30]'
                   : 'border-[#E7E3D8] focus:border-[#142420]'
               "
             />
-            @if (name?.invalid && name?.touched) {
+            @if (name.invalid && name.touched) {
               <p class="mt-1 text-xs text-[#D85A30]">
-                @if (name?.errors?.['required']) {
+                @if (name.errors?.['required']) {
                   Name is required.
-                } @else if (name?.errors?.['minlength']) {
+                } @else if (name.errors?.['minlength']) {
                   Name should be at least 2 characters.
                 }
               </p>
@@ -55,16 +55,16 @@
               placeholder="you@example.com"
               class="mt-1 w-full rounded-lg border px-3 py-2 text-sm text-[#142420] outline-none transition-colors"
               [ngClass]="
-                email?.invalid && email?.touched
+                email.invalid && email.touched
                   ? 'border-[#D85A30] focus:border-[#D85A30]'
                   : 'border-[#E7E3D8] focus:border-[#142420]'
               "
             />
-            @if (email?.invalid && email?.touched) {
+            @if (email.invalid && email.touched) {
               <p class="mt-1 text-xs text-[#D85A30]">
-                @if (email?.errors?.['required']) {
+                @if (email.errors?.['required']) {
                   Email is required.
-                } @else if (email?.errors?.['email']) {
+                } @else if (email.errors?.['email']) {
                   Enter a valid email address.
                 }
               </p>
@@ -80,27 +80,32 @@
               placeholder="What's on your mind?"
               class="mt-1 w-full resize-none rounded-lg border px-3 py-2 text-sm text-[#142420] outline-none transition-colors"
               [ngClass]="
-                message?.invalid && message?.touched
+                message.invalid && message.touched
                   ? 'border-[#D85A30] focus:border-[#D85A30]'
                   : 'border-[#E7E3D8] focus:border-[#142420]'
               "
             ></textarea>
-            @if (message?.invalid && message?.touched) {
+            @if (message.invalid && message.touched) {
               <p class="mt-1 text-xs text-[#D85A30]">
-                @if (message?.errors?.['required']) {
+                @if (message.errors?.['required']) {
                   Message is required.
-                } @else if (message?.errors?.['minlength']) {
+                } @else if (message.errors?.['minlength']) {
                   Message should be at least 10 characters.
                 }
               </p>
             }
           </div>
 
+          @if (error) {
+            <p class="text-xs text-[#D85A30]">{{ error }}</p>
+          }
+
           <button
             type="submit"
-            class="mt-2 rounded-lg bg-[#142420] py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90"
+            [disabled]="sending"
+            class="mt-2 rounded-lg bg-[#142420] py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-50"
           >
-            Send message
+            {{ sending ? 'Sending...' : 'Send message' }}
           </button>
         </form>
       </div>

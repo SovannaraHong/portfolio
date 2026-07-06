@@ -10,6 +10,7 @@ export interface Project {
   logo?: string;
   accent: 'coral' | 'lime' | 'teal';
   link: string;
+  status?: 'live' | 'in-progress';
 }
 
 @Component({
@@ -30,6 +31,7 @@ export class Card {
       accent: 'coral',
       logo: '/icon/log/phoneshop.jpg',
       link: 'https://github.com/SovannaraHong/phone_shop',
+      status: 'live',
     },
     {
       name: 'COFFEE-SHOP',
@@ -40,6 +42,7 @@ export class Card {
       accent: 'lime',
       logo: '/icon/log/coffee.jpg',
       link: 'https://github.com/SovannaraHong/coffee-shop-system',
+      status: 'in-progress',
     },
     {
       name: 'ZENDO-CLONE',
@@ -51,6 +54,7 @@ export class Card {
       accent: 'teal',
       logo: '/icon/log/zando.png',
       link: 'https://zando-clone-five.vercel.app/',
+      status: 'live',
     },
     {
       name: 'PKA-CLONE',
@@ -62,6 +66,7 @@ export class Card {
       accent: 'coral',
       logo: '/icon/log/p5.png',
       link: 'https://pka-ecommerce.vercel.app/',
+      status: 'live',
     },
     {
       name: 'GUEST HOUSE',
@@ -71,6 +76,7 @@ export class Card {
       stack: ['Spring-boot', 'Spring-Security', 'JWT', 'Posgres'],
       accent: 'lime',
       link: '#',
+      status: 'in-progress',
     },
   ];
 }

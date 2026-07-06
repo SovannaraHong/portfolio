@@ -16,10 +16,25 @@
   <div class="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-1 lg:grid-cols-2 xl:gap-6">
     @for (project of projects; track project.name; let i = $index) {
       <article
-        class="card-enter group flex overflow-hidden rounded-2xl border border-[#E7E3D8] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_10px_30px_rgba(20,36,32,0.10)]"
+        class="card-enter group relative flex overflow-hidden rounded-2xl border border-[#E7E3D8] bg-white transition-all duration-300 hover:-translate-y-1 hover:border-transparent hover:shadow-[0_10px_30px_rgba(20,36,32,0.10)]"
         [class.slide-from-right]="i % 2 === 1"
+        [class.opacity-80]="project.status === 'in-progress'"
         [style.animation-delay.ms]="i * 70"
       >
+        <!-- In-progress diagonal ribbon -->
+        @if (project.status === 'in-progress') {
+          <div
+            class="pointer-events-none absolute right-0 top-0 z-10 overflow-hidden"
+            style="width: 100px; height: 100px"
+          >
+            <span
+              class="absolute right-[-32px] top-[18px] block w-[140px] rotate-45 bg-[#D85A30] py-1 text-center text-[9px] font-bold uppercase tracking-wider text-white shadow-sm sm:text-[10px]"
+            >
+              In progress
+            </span>
+          </div>
+        }
+
         <!-- Left Color Bar -->
         <div
           class="flex w-8 shrink-0 items-center justify-center sm:w-10 md:w-12"
@@ -49,6 +64,7 @@
           <!-- Logo -->
           <div
             class="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#F1EFE8] text-xs font-bold text-[#142420] sm:h-12 sm:w-12 sm:text-sm"
+            [class.grayscale]="project.status === 'in-progress'"
           >
             @if (project.logo) {
               <img [src]="project.logo" [alt]="project.name" class="h-full w-full object-cover" />
@@ -60,32 +76,51 @@
           <!-- Right -->
           <div class="min-w-0 flex-1">
             <div class="flex flex-col gap-2 sm:gap-3 md:flex-row md:items-start md:justify-between">
-              <h3
-                class="text-base font-bold text-[#142420] sm:text-lg md:text-xl"
-                style="font-family: 'Space Grotesk', sans-serif"
-              >
-                {{ project.name }}
-              </h3>
-              <a
-                [href]="project.link"
-                target="_blank"
-                class="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-[#142420] transition hover:translate-x-1"
-              >
-                View
-                <svg
-                  class="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="2"
+              <div class="flex flex-wrap items-center gap-2">
+                <h3
+                  class="text-base font-bold text-[#142420] sm:text-lg md:text-xl"
+                  style="font-family: 'Space Grotesk', sans-serif"
                 >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </a>
+                  {{ project.name }}
+                </h3>
+                @if (project.status === 'in-progress') {
+                  <span
+                    class="inline-flex items-center gap-1 rounded-full bg-[#FDECE6] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-[#D85A30]"
+                  >
+                    <span class="h-1.5 w-1.5 animate-pulse rounded-full bg-[#D85A30]"></span>
+                    Building
+                  </span>
+                }
+              </div>
+
+              @if (project.status !== 'in-progress') {
+                <a
+                  [href]="project.link"
+                  target="_blank"
+                  class="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-[#142420] transition hover:translate-x-1"
+                >
+                  View
+                  <svg
+                    class="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </a>
+              } @else {
+                <span
+                  class="inline-flex shrink-0 cursor-not-allowed items-center gap-1 text-sm font-semibold text-[#9A9C8E]"
+                >
+                  Coming soon
+                </span>
+              }
             </div>
             <p class="mt-2 text-sm leading-relaxed text-[#6E756D] sm:text-[15px]">
               {{ project.description }}
