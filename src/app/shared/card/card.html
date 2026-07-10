@@ -72,7 +72,6 @@
               {{ project.initials }}
             }
           </div>
-
           <!-- Right -->
           <div class="min-w-0 flex-1">
             <div class="flex flex-col gap-2 sm:gap-3 md:flex-row md:items-start md:justify-between">
@@ -93,36 +92,61 @@
                 }
               </div>
 
-              @if (project.status !== 'in-progress') {
-                <a
-                  [href]="project.link"
-                  target="_blank"
-                  class="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-[#142420] transition hover:translate-x-1"
-                >
-                  View
-                  <svg
-                    class="h-4 w-4"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
+              <div class="flex shrink-0 items-center gap-3">
+                @if (project.docs) {
+                  <button
+                    type="button"
+                    (click)="openDocs(project)"
+                    class="inline-flex items-center gap-1 rounded-full border border-[#E7E3D8] bg-[#F7F5EF] px-3 py-1 text-xs font-semibold text-[#142420] transition hover:border-[#142420] hover:bg-[#142420] hover:text-white"
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </a>
-              } @else {
-                <span
-                  class="inline-flex shrink-0 cursor-not-allowed items-center gap-1 text-sm font-semibold text-[#9A9C8E]"
-                >
-                  Coming soon
-                </span>
-              }
+                    <svg
+                      class="h-3.5 w-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      />
+                    </svg>
+                    Docs
+                  </button>
+                }
+
+                @if (project.status !== 'in-progress') {
+                  <a
+                    [href]="project.link"
+                    target="_blank"
+                    class="inline-flex items-center gap-1 text-sm font-semibold text-[#142420] transition hover:translate-x-1"
+                  >
+                    View
+                    <svg
+                      class="h-4 w-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </a>
+                } @else {
+                  <span
+                    class="inline-flex cursor-not-allowed items-center gap-1 text-sm font-semibold text-[#9A9C8E]"
+                  >
+                    Coming soon
+                  </span>
+                }
+              </div>
             </div>
-            <p class="mt-2 text-sm leading-relaxed text-[#6E756D] sm:text-[15px]">
+            <p class="mt-2 text-sm leading-relaxed text-[#6E756D] sm:text-[15px] line-clamp-1">
               {{ project.description }}
             </p>
             <!-- Tags -->
@@ -140,4 +164,162 @@
       </article>
     }
   </div>
+
+  <!-- Docs Modal -->
+  @if (activeDocs(); as project) {
+    <div
+      class="fixed inset-0 z-50 flex items-center justify-center bg-[#142420]/50 p-4 backdrop-blur-sm"
+      (click)="closeDocs()"
+    >
+      <div
+        class="relative flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+        (click)="$event.stopPropagation()"
+      >
+        <!-- Modal header -->
+        <div
+          class="flex items-center justify-between border-b border-[#E7E3D8] px-5 py-4 sm:px-6"
+          [ngClass]="{
+            'bg-[#FDECE6]': project.accent === 'coral',
+            'bg-[#F2F6D8]': project.accent === 'lime',
+            'bg-[#E5EEEC]': project.accent === 'teal',
+          }"
+        >
+          <div class="flex items-center gap-3">
+            <div
+              class="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white text-xs font-bold text-[#142420]"
+            >
+              @if (project.logo) {
+                <img [src]="project.logo" [alt]="project.name" class="h-full w-full object-cover" />
+              } @else {
+                {{ project.initials }}
+              }
+            </div>
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.15em] text-[#6E756D]">
+                {{ project.category }}
+              </p>
+              <h3
+                class="text-lg font-bold text-[#142420] sm:text-xl"
+                style="font-family: 'Space Grotesk', sans-serif"
+              >
+                {{ project.name }}
+              </h3>
+            </div>
+          </div>
+          <button
+            type="button"
+            (click)="closeDocs()"
+            class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white/70 text-[#142420] transition hover:bg-white"
+            aria-label="Close docs"
+          >
+            <svg
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="flex-1 overflow-y-auto px-5 py-6 sm:px-6">
+          @if (project.docs; as docs) {
+            <!-- Intro -->
+            <p class="text-sm font-poppins leading-relaxed text-[#3D423C] sm:text-[15px]">
+              {{ docs.intro }}
+            </p>
+
+            <!-- Sections -->
+            @for (section of docs.sections; track section.heading) {
+              <div class="mt-6">
+                <div class="mb-3 flex items-center gap-2">
+                  <span
+                    class="h-1.5 w-1.5 shrink-0 rounded-full"
+                    [ngClass]="{
+                      'bg-[#FF6B52]': project.accent === 'coral',
+                      'bg-[#8FA92E]': project.accent === 'lime',
+                      'bg-[#2B6F62]': project.accent === 'teal',
+                    }"
+                  ></span>
+                  <h4
+                    class="text-[15px] font-bold font-poppins uppercase tracking-[0.15em] text-[#142420]"
+                  >
+                    {{ section.heading }}
+                  </h4>
+                </div>
+                <ul class="space-y-2 ml-[10px]">
+                  @for (item of section.items; track item) {
+                    <li
+                      class="flex items-start gap-2.5 text-sm leading-relaxed text-[#3D423C] sm:text-[15px]"
+                    >
+                      <span
+                        class="mt-2 h-1 w-1 shrink-0 rounded-full"
+                        [ngClass]="{
+                          'bg-[#000000]': project.accent === 'coral',
+                          'bg-[#6B8425]': project.accent === 'lime',
+                          'bg-[#2B6F62]': project.accent === 'teal',
+                        }"
+                      ></span>
+                      <span class="font-poppins text-[14px]">{{ item }}</span>
+                    </li>
+                  }
+                </ul>
+              </div>
+            }
+
+            <!-- Tech stack -->
+            @if (docs.stack.length) {
+              <div class="mt-6">
+                <div class="mb-3 flex items-center gap-2">
+                  <span
+                    class="h-1.5 w-1.5 shrink-0 rounded-full"
+                    [ngClass]="{
+                      'bg-[#FF6B52]': project.accent === 'coral',
+                      'bg-[#8FA92E]': project.accent === 'lime',
+                      'bg-[#2B6F62]': project.accent === 'teal',
+                    }"
+                  ></span>
+                  <h4 class="text-xs font-bold uppercase tracking-[0.15em] text-[#142420]">
+                    Technologies used
+                  </h4>
+                </div>
+                <div class="flex flex-wrap gap-2">
+                  @for (tech of docs.stack; track tech) {
+                    <span
+                      class="rounded-full bg-[#F1EFE8] px-3 py-1 text-xs font-medium text-[#5B6058]"
+                    >
+                      {{ tech }}
+                    </span>
+                  }
+                </div>
+              </div>
+            }
+
+            <!-- Closing note -->
+            @if (docs.closing) {
+              <p
+                class="mt-6 border-t border-[#E7E3D8] pt-5 text-sm italic leading-relaxed text-[#6E756D]"
+              >
+                {{ docs.closing }}
+              </p>
+            }
+          }
+        </div>
+
+        <!-- Modal footer -->
+        <div class="border-t border-[#E7E3D8] px-5 py-3 sm:px-6">
+          <button
+            type="button"
+            (click)="closeDocs()"
+            class="w-full rounded-full bg-[#142420] py-2.5 text-sm font-semibold text-white transition hover:bg-[#0C1613] sm:w-auto sm:px-6"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 </section>
